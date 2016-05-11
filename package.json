@@ -10,9 +10,10 @@
     "name": "Chris Stoy"
   },
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "gulp-load-plugins": "^1.2.2"
   },
   "scripts": {
-    "postinstall" : "bower install"
+    "postinstall": "bower install"
   }
 }
