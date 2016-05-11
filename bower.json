@@ -1,0 +1,24 @@
+{
+  "name": "jquerycroptest",
+  "homepage": "https://github.com/chrisstoy/jquery-cropper",
+  "authors": [
+    "cstoy <chrisstoy@gmail.com>"
+  ],
+  "description": "Test App for the jquery-cropper plugin",
+  "main": "test-crop.html",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "fabric.js": "fabric#^1.6.1",
+    "bootstrap": "^3.3.6"
+  }
+}
