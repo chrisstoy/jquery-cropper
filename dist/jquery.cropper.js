@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Simple Image Cropper that works on Desktop and Mobile
  * This plugin widget depends on jQuery, jQueryUI, and FabricJS.
  * see https://learn.jquery.com/plugins/stateful-plugins-with-widget-factory/

@@ -24,9 +24,7 @@ $(document).ready(function () {
 
 
 		//$('.result').css('background-position', cropData.)
-
-
-	};
+	}
 
 
 	$(cropperElem).cropper({

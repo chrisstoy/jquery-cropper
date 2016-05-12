@@ -19,6 +19,7 @@
   "dependencies": {
     "jquery": "^2.2.3",
     "fabric.js": "fabric#^1.6.1",
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "jquery-ui": "^1.11.4"
   }
 }

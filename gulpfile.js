@@ -1,45 +1,40 @@
+(function() {
+
 'use strict';
 
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
-var pkg = require('./package');
-var now = new Date();
-var scripts = {
-  name: 'jquery.cropper.js',
-  main: 'dist/jquery.cropper.js',
-  src: 'src/*.js',
-  dest: 'dist'
-};
-var replacement = {
-  regexp: /@\w+/g,
-  filter: function (placeholder) {
-    switch (placeholder) {
-      case '@VERSION':
-        placeholder = pkg.version;
-        break;
+var del = require('del');
+var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
 
-      case '@YEAR':
-        placeholder = now.getFullYear();
-        break;
-
-      case '@DATE':
-        placeholder = now.toISOString();
-        break;
-    }
-
-    return placeholder;
-  }
+var paths = {
+	src : 'src/*.js',
+	tests : 'example/*.js'
 };
 
-gulp.task('jshint', ['js+'], function () {
-  return gulp.src(scripts.all)
+
+gulp.task('clean', function(){ //Takes in a callback to let the engine know when it is done.
+	return del([
+		'dist/**/*' //This tells del to delete all files and folders within the dist Ò
+	]);
+});
+
+gulp.task('package', ['clean'], function() {
+	gulp.src(paths.src)
+		.pipe(gulp.dest('dist'))
+		.pipe(uglify())
+		.pipe(rename({suffix: ".min"}))
+		.pipe(gulp.dest('dist'));
+});
+
+gulp.task('jshint', function () {
+  return gulp.src([paths.tests, paths.src])
     .pipe(plugins.jshint())
     .pipe(plugins.jshint.reporter('default'));
 });
 
-gulp.task('test', ['js', 'css'], function () {
-  return gulp.src('test/*.html')
-    .pipe(plugins.qunit());
-});
 
-gulp.task('default', ['test']);
+gulp.task('default', ['jshint', 'package']);
+
+})();
