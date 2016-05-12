@@ -18,7 +18,8 @@ $(document).ready(function () {
 
 	function updateCroppedImage() {
 		var cropData = cropperElem.cropper('cropData');
-		console.log("Crop Data: " + JSON.stringify(cropData));
+
+		$('.crop-data').text("Crop Data: " + JSON.stringify(cropData));
 
 		var origImage = cropperElem.cropper('imageSize');
 
