@@ -10,13 +10,11 @@ see https://learn.jquery.com/plugins/stateful-plugins-with-widget-factory/
 
 ##  Create a cropper widget
  
- At a minimum, you must define an element that has a `<canvas>` as a child.  For example:
+At a minimum, you must define an element that has a `<canvas>` as a child.  For example:
 
-`
-<div class="crop-wrapper">
-	<canvas></canvas>
-</div>
-`
+    <div class="crop-wrapper">
+	    <canvas></canvas>
+    </div>
 
 Then, in your Javascript, attach the cropper widget to the outer `<div>` element. Example:
 
