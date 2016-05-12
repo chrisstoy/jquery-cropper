@@ -7,30 +7,30 @@ $(document).ready(function () {
 
 	var cropperElem = $('.cropper-wrapper');
 
-/*	var fanvas = new fabric.StaticCanvas('cropped-image');
-	fanvas.setDimensions({ width: 300, height: 300});
-	fanvas.clear();
-	var resultImage = null;
-	fabric.Image.fromURL('./test-image.jpg', function(img) {
-		resultImage = img;
-		fanvas.add(img.set({ left: 0, top: 0 }).scale(0.25));
-	});*/
+	/*	var fanvas = new fabric.StaticCanvas('cropped-image');
+	 fanvas.setDimensions({ width: 300, height: 300});
+	 fanvas.clear();
+	 var resultImage = null;
+	 fabric.Image.fromURL('./test-image.jpg', function(img) {
+	 resultImage = img;
+	 fanvas.add(img.set({ left: 0, top: 0 }).scale(0.25));
+	 });*/
 
 	function updateCroppedImage() {
-		var cropData = cropperElem.cropper('cropData');
 
-		$('.crop-data').text("Crop Data: " + JSON.stringify(cropData));
+		// get the part of the image we are cropping
+		var cropData = cropperElem.cropper('imageCrop');
+		$('.crop-data').text(JSON.stringify(cropData, null, 3));
 
-		var origImage = cropperElem.cropper('imageSize');
-
-
-		//$('.result').css('background-position', cropData.)
+		$('.result').css('background-position', (-cropData.left) + "px " + (-cropData.top) + "px");
+		$('.result').css('width', cropData.width + "px");
+		$('.result').css('height', cropData.height + "px");
 	}
 
 
 	$(cropperElem).cropper({
-			imageUrl: './test-image.jpg'
-		})
+		imageUrl: './test-image.jpg'
+	})
 		.bind('cropperchanged', function (event, data) {
 			// handle when cropData has changed
 			updateCroppedImage();
@@ -39,6 +39,15 @@ $(document).ready(function () {
 			// handle when cropper is ready to crop
 			var imgUrl = cropperElem.cropper('option', 'imageUrl');
 			$('.result').css('background-image', 'url(' + imgUrl + ')');
+
+			// set the initial crop size and location
+			var crop = {
+				"left": 560,
+				"top": 50,
+				"width": 160,
+				"height": 155
+			};
+			cropperElem.cropper('imageCrop', crop);
 
 			updateCroppedImage();
 		});

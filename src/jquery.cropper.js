@@ -1,6 +1,9 @@
-﻿/**
+﻿/*!
  * Simple Image Cropper that works on Desktop and Mobile
  * This plugin widget depends on jQuery, jQueryUI, and FabricJS.
+ * Copyright 2016 Chris Stoy
+ * Licensed under the MIT license
+ *
  * see https://learn.jquery.com/plugins/stateful-plugins-with-widget-factory/
  */
 (function ($) {
@@ -48,7 +51,7 @@
 
 		_rawImage: null,	// the HTML Image object that we loaded
 
-		// gets or sets the crop information
+		// gets or sets the crop information using UV (%) coordinates
 		cropData: function (value) {
 			if (value === undefined) {
 				return this._model.cropData;
@@ -58,6 +61,33 @@
 				return this._model.cropData;
 			}
 		},
+
+		// gets or sets the crop information using Image pixels
+		imageCrop: function (value) {
+			if (value === undefined) {
+				// convert the UV data to source image pixel position
+				var data = {
+					left : this._model.cropData.u * this._rawImage.width,
+					top : this._model.cropData.v * this._rawImage.height,
+					width : this._model.cropData.width * this._rawImage.width,
+					height : this._model.cropData.height * this._rawImage.height
+				};
+				return data;
+			} else {
+				// set crop data from pixel positions
+				var data = {
+					u : value.left / this._rawImage.width,
+					v : value.top / this._rawImage.height,
+					width : value.width / this._rawImage.width,
+					height : value.height / this._rawImage.height
+				};
+
+				this._model.cropData = data;
+				this._update();
+				return this._model.cropData;
+			}
+		},
+
 
 		// returns the original size of the image being cropped
 		imageSize: function(value) {
